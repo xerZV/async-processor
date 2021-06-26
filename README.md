@@ -16,7 +16,7 @@ A simple project with async processes using CompletableFuture with timeout.
 4. `./async-processor/mvn spring-boot:run` -> it will start the async-processor on `http://localhost:8181`
 5. `./converter/mvn spring-boot:run` -> it will start the converter on `http://localhost:8182`
 
-## Sample requests and response
+## Sample requests and responses
 
 Sample request:
 ```http request
@@ -36,6 +36,9 @@ Sample response:
 
 Traceability:
 ![plot](./resources/images/traceability10integers.jpg)
+We can see in the image above there are 4 spawned threads in `async-processor` (_we configured `app.async.processor.thread-count=4`_)
+and each thread is processing `integers.size()/preferredThreadCount=(10/4)+1=3` integers.
+The integers inside each thread are processed sequentially.
 
 For more request please see `./resources/requests.http`
 
