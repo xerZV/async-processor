@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: async-processor
+server:
+  port: 8181
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true
+
+app:
+  async:
+    processor:
+      thread-count: 4
+      timeout: 10s

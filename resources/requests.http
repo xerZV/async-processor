@@ -1,0 +1,18 @@
+###
+GET http://localhost:8080/greetings/processor
+
+###
+GET http://localhost:8080/greetings/async-server
+
+###
+POST http://localhost:8080/integers
+Content-Type: application/json
+
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+### convert integers to strings with prefix
+POST http://localhost:8080/integers/with-prefix
+Content-Type: application/json
+
+{ "integers": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], "prefix": "tmp"}
+

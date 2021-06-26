@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: async-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: processor-convert
+          uri: lb://ASYNC-PROCESSOR
+          predicates:
+            - Path=/integers/**
+        - id: processor-greetings
+          uri: lb://ASYNC-PROCESSOR
+          predicates:
+            - Path=/greetings/processor
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "/(?<remaining>.*)/processor"
+                replacement: "/$\\{remaining}"
+        - id: server
+          uri: lb://ASYNC-SERVER
+          predicates:
+            - Path=/greetings/async-server
+          filters:
+            - name: RewritePath
+              args:
+                regexp: "/(?<remaining>.*)/async-server"
+                replacement: "/$\\{remaining}"
+server:
+  port: 8080
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}

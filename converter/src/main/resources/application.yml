@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: async-server
+server:
+  port: 8182
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
